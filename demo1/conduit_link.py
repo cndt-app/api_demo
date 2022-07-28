@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 
 import requests
 
-CONDUIT_API_URL = 'https://link-dev.getconduit.app'
+CONDUIT_API_URL = 'https://link.getconduit.app'
 CONDUIT_CUSTOMER_API_KEY = ' place your api key here '
 
 __all__ = (
