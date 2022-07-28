@@ -43,7 +43,8 @@ def process_data_chunks(driver_id: str, account_id: int, path: str, date_range: 
                 + f"updated_at: {chunk['data_updated_at']}"
             )
 
-            download_data_chunk(chunk['url'], os.path.join(path, f"{chunk['date']}.csv"))
+            if chunk['url']:
+                download_data_chunk(chunk['url'], os.path.join(path, f"{chunk['date']}.csv"))
 
 
 def download_data_chunk(url: str, filename: str) -> None:
