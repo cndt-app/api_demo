@@ -23,21 +23,21 @@ def get_credentials() -> list[dict[str, Any]]:
 
 
 def get_data_chunks(
-    integration_id: str,
+    integration: str,
     date_from: date,
     date_to: date,
     account_id: Optional[int] = None,
 ) -> dict[str, list[dict[str, str]]]:
     """
     Gets a list of data chunks for the given integration, account and date range.
-    :param integration_id: integration unique id
+    :param integration: integration unique name
     :param date_from: starting date
     :param date_to: ending date
     :param account_id: if set returns data urls for this account only
     :return: lists of data chunks grouped by theirs data schema
     """
     params: dict[str, Any] = {
-        'driver_id': integration_id,
+        'driver_id': integration,
         'date_from': date_from.isoformat(),
         'date_to': date_to.isoformat(),
     }
