@@ -15,29 +15,29 @@ __all__ = (
 
 def get_credentials() -> list[dict[str, Any]]:
     """
-    Gets a list of available data drivers and theirs connected accounts.
-    :return: list of drivers
+    Gets a list of available integrations and theirs connected accounts.
+    :return: list of integrations
     """
     res = _request('credentials/')
     return res
 
 
 def get_data_chunks(
-    driver_id: str,
+    integration_id: str,
     date_from: date,
     date_to: date,
     account_id: Optional[int] = None,
 ) -> dict[str, list[dict[str, str]]]:
     """
-    Gets a list of data chunks for the given driver, account and date range.
-    :param driver_id: driver unique slug
+    Gets a list of data chunks for the given integration, account and date range.
+    :param integration_id: integration unique id
     :param date_from: starting date
     :param date_to: ending date
     :param account_id: if set returns data urls for this account only
-    :return: lists of data chunks grouped by theirs data schema slug
+    :return: lists of data chunks grouped by theirs data schema
     """
     params: dict[str, Any] = {
-        'driver_id': driver_id,
+        'driver_id': integration_id,
         'date_from': date_from.isoformat(),
         'date_to': date_to.isoformat(),
     }
