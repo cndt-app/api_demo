@@ -6,8 +6,7 @@ from conduit_users import create_user, get_users_info
 
 def print_user_info(user: dict[str, Any]) -> None:
     print(f"User '{user['guid']}': created at: {user['created_at']}")
-    print(f"  User's token: {user['token']['token']}")
-    print(f"  User's token expires at: {datetime.fromtimestamp(user['token']['expires_at'])}")
+    print(f"  User's token: {user['token']} (lifetime is limited)")
 
     for integration in user['connections']:
         print(f"  Integration: {integration['name']}")
