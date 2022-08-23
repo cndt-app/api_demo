@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 
 import requests
 
-CONDUIT_API_URL = 'https://link.getconduit.app'
+CONDUIT_API_URL = 'https://api.getconduit.app'
 CONDUIT_CUSTOMER_API_KEY = ' place your api key here '
 
 __all__ = (
@@ -18,7 +18,7 @@ def get_credentials() -> list[dict[str, Any]]:
     Gets a list of available integrations and theirs connected accounts.
     :return: list of integrations
     """
-    res = _request('credentials/')
+    res = _request('link/credentials/')
     return res
 
 
@@ -44,7 +44,7 @@ def get_data_chunks(
     if account_id:
         params['account_id'] = account_id
 
-    res = _request('data_lake/', params)
+    res = _request('link/data_lake/', params)
     return res
 
 
