@@ -3,7 +3,7 @@ from urllib.parse import urljoin
 
 import requests
 
-CONDUIT_API_URL = 'https://link.getconduit.app'
+CONDUIT_API_URL = 'https://api.getconduit.app'
 CONDUIT_API_KEY = ' place your api key here '
 
 
@@ -12,7 +12,7 @@ def get_users() -> str:
     Returns list of consumer's users.
     :return: list of users
     """
-    res = _request('users/', method='GET')
+    res = _request('link/users/', method='GET')
     return res.json()
 
 
@@ -21,7 +21,7 @@ def get_users_info() -> str:
     Returns list of consumer's users with theirs connections and access tokens.
     :return: list of users info
     """
-    res = _request('users/info/', method='GET')
+    res = _request('link/users/info/', method='GET')
     return res.json()
 
 
@@ -32,7 +32,7 @@ def create_user(user_guid: str, name: str = None, email: str = None) -> dict[str
     :param name: name of the user
     :param email: user's email (unique within the system)
     """
-    res = _request('users/', params=_get_user_params(user_guid, name, email))
+    res = _request('link/users/', params=_get_user_params(user_guid, name, email))
     return res.json()
 
 
@@ -42,7 +42,7 @@ def get_user_token(user_guid: str) -> str:
     :param user_guid: user's guid
     :return: token
     """
-    res = _request('auth/token/', params={'guid': user_guid})
+    res = _request('link/auth/token/', params={'guid': user_guid})
     return res.json()['token']
 
 
