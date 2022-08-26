@@ -26,11 +26,11 @@ def main(date_range: tuple[date, date]) -> None:
                 process_data_chunks(integration['id'], account['id'], path, date_range)
 
 
-def process_data_chunks(integration_id: str, account_id: int, path: str, date_range: tuple[date, date]) -> None:
+def process_data_chunks(integration_id: str, account: int, path: str, date_range: tuple[date, date]) -> None:
     date_from, date_to = date_range
 
     # Getting a list of data chunks
-    data_chunks = get_data_chunks(integration_id, date_from, date_to, account_id)
+    data_chunks = get_data_chunks(integration_id, date_from, date_to, account)
 
     for schema, chunks in data_chunks.items():
         for chunk in chunks:
