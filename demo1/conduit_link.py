@@ -37,7 +37,7 @@ def get_data_chunks(
     :return: lists of data chunks grouped by theirs data schema
     """
     params: dict[str, Any] = {
-        'integration_id': integration,
+        'integration': integration,
         'date_from': date_from.isoformat(),
         'date_to': date_to.isoformat(),
     }
