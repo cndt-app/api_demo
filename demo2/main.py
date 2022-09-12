@@ -1,14 +1,15 @@
-from typing import Any
 from datetime import datetime
+from typing import Any
 
-from conduit_users import create_user, get_users_info
+from conduit_companies import create_company, get_companies
 
 
-def print_user_info(user: dict[str, Any]) -> None:
-    print(f"User '{user['guid']}': created at: {user['created_at']}")
-    print(f"  User's token: {user['token']} (lifetime is limited)")
+def print_company_info(company: dict[str, Any]) -> None:
+    print(f"Company '{company['id']}': created at: {company['created_at']}")
+    token_expires_at = datetime.fromtimestamp(company['api_token']['expires_at']).isoformat()
+    print(f"  Company token: {company['api_token']['token']} (expires at {token_expires_at})")
 
-    for integration in user['connections']:
+    for integration in company['connections']:
         print(f"  Integration: {integration['name']}")
 
         for credentials in integration['credentials']:
@@ -23,14 +24,13 @@ def print_user_info(user: dict[str, Any]) -> None:
 
 
 def main() -> None:
-    users_info = get_users_info()
+    companies = get_companies()
+    if not companies:
+        create_company('company1')
+        companies = get_companies()
 
-    if not users_info:
-        create_user('user1')
-        users_info = get_users_info()
-
-    for user in users_info:
-        print_user_info(user)
+    for company in companies:
+        print_company_info(company)
 
 
 if __name__ == '__main__':

@@ -43,11 +43,11 @@ You can obtain your API key at Conduit developers portal:
 4. Click on `Link Apps` link in the left navigation sidebar;
 5. Create your application there and copy its key.
 
-Place your API key to CONDUIT_API_KEY constant in `conduit_users.py`.
+Place your API key to CONDUIT_API_KEY constant in `conduit_companies.py`.
 
 ### Usage
 
 Run `python main.py`
 
-The script will print a list of all users and their connections.
-If you don't have any users the script will create one for you.
+The script will print a list of all companies and their connections.
+If you don't have any companies - the script will create one for you.

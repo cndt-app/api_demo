@@ -7,32 +7,27 @@ CONDUIT_API_URL = 'https://api.getconduit.app'
 CONDUIT_API_KEY = ' place your api key here '
 
 
-def get_users() -> str:
+def get_companies() -> list[dict[str, Any]]:
     """
-    Returns list of consumer's users.
+    Returns list of companies
     :return: list of users
     """
-    res = _request('link/users/', method='GET')
+    res = _request('link/company/?include_connections=true', method='GET')
     return res.json()
 
 
-def get_users_info() -> str:
+def create_company(
+        company_id: str,
+        name: str = None,
+        page_enabled: bool = True,
+) -> dict[str, Any]:
     """
-    Returns list of consumer's users with theirs connections and access tokens.
-    :return: list of users info
+    Creates a new company with given name and email.
+    :param company_id: company guid(unique within API consumer)
+    :param name: name of the company
+    :param page_enabled: Enabling company credentials page
     """
-    res = _request('link/users/info/', method='GET')
-    return res.json()
-
-
-def create_user(user_guid: str, name: str = None, email: str = None) -> dict[str, Any]:
-    """
-    Creates a new user with given name and email.
-    :param user_guid: user's guid (unique within API consumer)
-    :param name: name of the user
-    :param email: user's email (unique within the system)
-    """
-    res = _request('link/users/', params=_get_user_params(user_guid, name, email))
+    res = _request('link/company/', params=_get_company_params(company_id, name, page_enabled))
     return res.json()
 
 
@@ -46,14 +41,14 @@ def get_user_token(user_guid: str) -> str:
     return res.json()['token']
 
 
-def _get_user_params(user_guid: str, name: str = None, email: str = None) -> dict[str, str]:
+def _get_company_params(company_id: str, name: str, page_enabled: bool) -> dict[str, str]:
     params = {
-        'guid': user_guid,
+        'id': company_id,
     }
     if name is not None:
         params['name'] = name
-    if email is not None:
-        params['email'] = email
+    if page_enabled is not None:
+        params['page_enabled'] = page_enabled
 
     return params
 
