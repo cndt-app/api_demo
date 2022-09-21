@@ -23,6 +23,3 @@ Place your API key to CONDUIT_CUSTOMER_API_KEY constant in `conduit_link.js`.
 Run `npm run main`
 
 The script will parse all your connections and download data for a week.
-
-
-
