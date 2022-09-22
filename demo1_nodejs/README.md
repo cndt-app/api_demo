@@ -72,21 +72,17 @@ The script will parse all your connections and download data for a week.
 Для запроса к эндпоинту важно передать:
 
 1) Заголовок `accept': 'application/json`
-2) Токен разработчика, как query параметр `?token=your_token_here`
+2) [Токен разработчика](#customer-api-key)), как query параметр `?token=your_token_here`
 
-(информация как получить токен есть в [README.md](./README.md) не дублирую)
 
 #### Подготовка
 
-Сначала необходимо импортировать библиотеку:
+Для начала подготовим основу.
+Импортируем библиотеку и создадим асинхронную функцию верхнего уровня
 
 ```js 
 const axios = require("axios");
-```
 
-И написать асинхронную функцию верхнего уровня
-
-```js
 (async () => {
     // All code goes here
 })()
