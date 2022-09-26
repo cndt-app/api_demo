@@ -7,7 +7,7 @@ import {getCredentials, getDataChunks} from './conduit_link.mjs'
 
 const DATA_DIR = path.join(path.resolve(), 'data')
 
-async function processDataChunks(integration_id, account, path_, dateRange) {
+async function processDataChunks(integration_id, account, directoryPath, dateRange) {
     let [dateFrom, dateTo] = dateRange
 
     // Getting a list of data chunks
@@ -21,7 +21,7 @@ async function processDataChunks(integration_id, account, path_, dateRange) {
             )
 
             if (chunk.url) {
-                await downloadDataChunk(chunk.url, path.join(path_, `${chunk.date}.csv`))
+                await downloadDataChunk(chunk.url, path.join(directoryPath, `${chunk.date}.csv`))
             }
         }
     }
