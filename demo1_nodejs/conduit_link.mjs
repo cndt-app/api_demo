@@ -7,9 +7,9 @@ async function httpGet(endpoint, params = {}) {
     let client = axios.create({
         baseURL: CONDUIT_API_URL,
         headers: {accept: 'application/json'},
-    });
+    })
     params.token = CONDUIT_CUSTOMER_API_KEY
-    return await client.get(endpoint, {params: params})
+    return client.get(endpoint, {params: params})
 }
 
 
@@ -38,21 +38,21 @@ async function getCredentials() {
  * Gets a list of data chunks for the given integration, account and date range.
  * @constructor
  * @param {String}  integration - integration unique name.
- * @param {Date}  date_from - starting date.
- * @param {Date}  date_to - ending date.
+ * @param {Date}  dateFrom - starting date.
+ * @param {Date}  dateTo - ending date.
  * @param {Number}  account - if set returns data urls for this account only.
  * @returns {Promise.<Object.<{String, Chunks}>>} lists of data chunks grouped by theirs data schema
  */
-async function getDataChunks(integration, date_from, date_to, account) {
+async function getDataChunks(integration, dateFrom, dateTo, account) {
     let params = {
         integration: integration,
-        date_from: date_from,
-        date_to: date_to,
-        account: account
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+        account: account,
     }
     let response = await httpGet('link/data_lake/', params)
     return response.data
 }
 
 
-export {getDataChunks, getCredentials}
+export { getDataChunks, getCredentials }

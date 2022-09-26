@@ -1,16 +1,17 @@
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
+import {fileURLToPath} from 'url'
 import axios from 'axios'
 import moment from 'moment'
-import { getCredentials, getDataChunks } from './conduit_link.mjs'
+import {getCredentials, getDataChunks} from './conduit_link.mjs'
+
 const DATA_DIR = path.join(path.resolve(), 'data')
 
-async function processDataChunks(integration_id, account, path_, date_range) {
-    let [date_from, date_to] = date_range
+async function processDataChunks(integration_id, account, path_, dateRange) {
+    let [dateFrom, dateTo] = dateRange
 
     // Getting a list of data chunks
-    let dataChunks = await getDataChunks(integration_id, date_from, date_to, account)
+    let dataChunks = await getDataChunks(integration_id, dateFrom, dateTo, account)
 
     for (let [schema, chunks] of Object.entries(dataChunks)) {
         for (let chunk of chunks) {
@@ -29,14 +30,14 @@ async function processDataChunks(integration_id, account, path_, date_range) {
 async function downloadDataChunk(url, filename) {
     try {
         let response = await axios.get(url, {responseType: 'stream'})
-        response.data.pipe(fs.createWriteStream(filename));
+        response.data.pipe(fs.createWriteStream(filename))
         console.log(`    ${response.headers['content-length']} bytes saved to file ${filename}`)
     } catch (e) {
         console.log(e)
     }
 }
 
-async function main(date_range) {
+async function main(dateRange) {
     //Getting a list of available integrations and theirs connected accounts
     let integrations = await getCredentials()
 
@@ -47,23 +48,24 @@ async function main(date_range) {
             for (let account of credentials.accounts) {
                 console.log(`  Account: ${account.id}:${account.name}, native id: ${account.native_id}`)
 
-                let path_ = path.join(DATA_DIR, integration.id, credentials.id.toString(), account.id.toString())
-                fs.mkdirSync(path_, {recursive: true});
+                let directoryPath = path.join(
+                    DATA_DIR,
+                    integration.id,
+                    credentials.id.toString(),
+                    account.id.toString(),
+                )
+                fs.mkdirSync(directoryPath, {recursive: true})
 
-                await processDataChunks(integration.id, account.id, path_, date_range)
+                await processDataChunks(integration.id, account.id, directoryPath, dateRange)
             }
         }
     }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-    let date_range = [
+    let dateRange = [
         moment().subtract(6, 'days').format('YYYY-MM-DD'),
         moment().format('YYYY-MM-DD'),
     ]
-    await main(date_range)
+    await main(dateRange)
 }
-
-
-
-
