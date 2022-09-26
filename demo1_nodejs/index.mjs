@@ -15,12 +15,8 @@ async function processDataChunks(integration_id, account, path_, date_range) {
     for (let [schema, chunks] of Object.entries(dataChunks)) {
         for (let chunk of chunks) {
             console.log(
-                `   `
-                + `${chunk.date}: `
-                + `schema: ${schema} `
-                + `service_status: ${chunk.service_status}, `
-                + `data_status: ${chunk.data_status}, `
-                + `updated_at: ${chunk.data_updated_at}`
+                `   ${chunk.date}: schema: ${schema} service_status: ${chunk.service_status}, ` +
+                `data_status: ${chunk.data_status}, updated_at: ${chunk.data_updated_at}`
             )
 
             if (chunk.url) {
