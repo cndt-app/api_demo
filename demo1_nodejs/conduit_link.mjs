@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const CONDUIT_API_URL = 'https://api.getconduit.app'
-const CONDUIT_CUSTOMER_API_KEY = '624d145f8b1841a4a3f2ea0454aebb83'
+const CONDUIT_CUSTOMER_API_KEY = ' place your api key here '
 
 async function httpGet(endpoint, params = {}) {
     let client = axios.create({
