@@ -4,7 +4,7 @@
   "description": "Conduit Link Api Demo",
   "main": "index.js",
   "scripts": {
-    "main": "node index.js"
+    "main": "node index.mjs"
   },
   "author": "",
   "license": "ISC",

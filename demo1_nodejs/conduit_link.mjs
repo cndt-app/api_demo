@@ -1,7 +1,17 @@
-const axios = require('axios').default;
+import axios from 'axios'
 
-CONDUIT_API_URL = 'https://api.getconduit.app'
-CONDUIT_CUSTOMER_API_KEY = ' place your api key here '
+const CONDUIT_API_URL = 'https://api.getconduit.app'
+const CONDUIT_CUSTOMER_API_KEY = '624d145f8b1841a4a3f2ea0454aebb83'
+
+async function httpGet(endpoint, params = {}) {
+    let client = axios.create({
+        baseURL: CONDUIT_API_URL,
+        headers: {accept: 'application/json'},
+    });
+    params.token = CONDUIT_CUSTOMER_API_KEY
+    return await client.get(endpoint, {params: params})
+}
+
 
 /**
  * @typedef {{name: String, id: Number, native_id: String}} Account
@@ -15,7 +25,7 @@ CONDUIT_CUSTOMER_API_KEY = ' place your api key here '
  * @returns {Promise.<Array.<{id: String, name: String, credentials: Credentials[]}>>} list of integrations
  */
 async function getCredentials() {
-    let response = await request('link/credentials/')
+    let response = await httpGet('link/credentials/')
     return response.data
 }
 
@@ -40,17 +50,9 @@ async function getDataChunks(integration, date_from, date_to, account) {
         date_to: date_to,
         account: account
     }
-    let response = await request('link/data_lake/', params)
+    let response = await httpGet('link/data_lake/', params)
     return response.data
 }
 
-async function request(endpoint, params = {}) {
-    params.token = CONDUIT_CUSTOMER_API_KEY
-    let fullPath = new URL(endpoint, CONDUIT_API_URL).href
-    let headers = {
-        'accept': 'application/json',
-    }
-    return axios.get(fullPath, {headers: headers, params: params})
-}
 
-module.exports = {getDataChunks, getCredentials}
+export {getDataChunks, getCredentials}

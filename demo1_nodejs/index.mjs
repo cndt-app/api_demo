@@ -1,21 +1,21 @@
-const fs = require("fs");
-const path = require("path")
-const axios = require("axios");
-const moment = require("moment");
-const {getCredentials, getDataChunks} = require("./conduit_link");
-
-DATA_DIR = path.join(__dirname, 'data')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import axios from 'axios'
+import moment from 'moment'
+import { getCredentials, getDataChunks } from './conduit_link.mjs'
+const DATA_DIR = path.join(path.resolve(), 'data')
 
 async function processDataChunks(integration_id, account, path_, date_range) {
     let [date_from, date_to] = date_range
 
     // Getting a list of data chunks
-    let data_chunks = await getDataChunks(integration_id, date_from, date_to, account)
+    let dataChunks = await getDataChunks(integration_id, date_from, date_to, account)
 
-    for (let [schema, chunks] of Object.entries(data_chunks)) {
+    for (let [schema, chunks] of Object.entries(dataChunks)) {
         for (let chunk of chunks) {
             console.log(
-                `      `
+                `   `
                 + `${chunk.date}: `
                 + `schema: ${schema} `
                 + `service_status: ${chunk.service_status}, `
@@ -32,9 +32,9 @@ async function processDataChunks(integration_id, account, path_, date_range) {
 
 async function downloadDataChunk(url, filename) {
     try {
-        let response = await axios.get(url, {responseType: "stream"})
+        let response = await axios.get(url, {responseType: 'stream'})
         response.data.pipe(fs.createWriteStream(filename));
-        console.log(`        ${response.headers['content-length']} bytes saved to file ${filename}`)
+        console.log(`    ${response.headers['content-length']} bytes saved to file ${filename}`)
     } catch (e) {
         console.log(e)
     }
@@ -60,12 +60,14 @@ async function main(date_range) {
     }
 }
 
-
-(async () => {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
     let date_range = [
         moment().subtract(6, 'days').format('YYYY-MM-DD'),
         moment().format('YYYY-MM-DD'),
     ]
     await main(date_range)
-})()
+}
+
+
+
 
