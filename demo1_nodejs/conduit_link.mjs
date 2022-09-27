@@ -46,8 +46,8 @@ async function getCredentials() {
 async function getDataChunks(integration, dateFrom, dateTo, account) {
     let params = {
         integration: integration,
-        dateFrom: dateFrom,
-        dateTo: dateTo,
+        date_from: dateFrom,
+        date_to: dateTo,
         account: account,
     }
     let response = await httpGet('link/data_lake/', params)

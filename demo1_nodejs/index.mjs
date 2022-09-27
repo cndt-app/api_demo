@@ -3,7 +3,7 @@ import path from 'path'
 import {fileURLToPath} from 'url'
 import axios from 'axios'
 import moment from 'moment'
-import {getCredentials, getDataChunks} from './conduit_link.mjs'
+import { getCredentials, getDataChunks } from './conduit_link.mjs'
 
 const DATA_DIR = path.join(path.resolve(), 'data')
 
