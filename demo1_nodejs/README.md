@@ -16,10 +16,10 @@ You can obtain your API key at Conduit developers portal:
 3. You'll be redirected to the developers portal https://developers.getconduit.app/;
 4. You can get your API key on `Home` page.
 
-Place your API key to CONDUIT_CUSTOMER_API_KEY constant in `conduit_link.js`.
+Place your API key to CONDUIT_CUSTOMER_API_KEY constant in `conduit_link.mjs`.
 
 ### Usage
 
-Run `npm run main`
+Run `npm run start`
 
 The script will parse all your connections and download data for a week.
