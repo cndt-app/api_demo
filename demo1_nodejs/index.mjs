@@ -7,11 +7,11 @@ import { getCredentials, getDataChunks } from './conduit_link.mjs'
 
 const DATA_DIR = path.join(path.resolve(), 'data')
 
-async function processDataChunks(integration_id, account, directoryPath, dateRange) {
+async function processDataChunks(integrationId, account, directoryPath, dateRange) {
     let [dateFrom, dateTo] = dateRange
 
     // Getting a list of data chunks
-    let dataChunks = await getDataChunks(integration_id, dateFrom, dateTo, account)
+    let dataChunks = await getDataChunks(integrationId, dateFrom, dateTo, account)
 
     for (let [schema, chunks] of Object.entries(dataChunks)) {
         for (let chunk of chunks) {
