@@ -17,7 +17,7 @@ async function appRequest(endpoint, method = 'POST', data = {}) {
     })
 }
 
-async function companyRequest(endpoint, method = 'POST', token, params = {}) {
+async function companyRequest(endpoint, token, method = 'GET', params = {}) {
     return axiosInstance.request({
         url: endpoint,
         method: method,
@@ -76,7 +76,7 @@ async function createCompany(companyId, name, pageEnabled) {
  * @returns {Promise.<String>} Connect URL.
  */
 async function getCompanyConnectIntegrationURL(companyToken, integration) {
-    let response = await companyRequest(`link/credentials/connect/${integration}/`, 'GET', companyToken)
+    let response = await companyRequest(`link/credentials/connect/${integration}/`, companyToken, 'GET')
     return response.data.url
 }
 
