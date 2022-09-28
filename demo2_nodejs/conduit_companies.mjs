@@ -3,27 +3,26 @@ import axios from 'axios'
 const CONDUIT_API_URL = 'https://api.getconduit.app'
 const CONDUIT_API_KEY = ' place your api key here '
 
+const axiosInstance = axios.create({
+    baseURL: CONDUIT_API_URL,
+    headers: {accept: 'application/json'},
+})
 
 async function appRequest(endpoint, method = 'POST', data = {}) {
-    let client = axios.create({
-        baseURL: CONDUIT_API_URL,
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${CONDUIT_API_KEY}`
-        },
+    return axiosInstance.request({
+        url: endpoint,
+        method: method,
+        data: data,
+        headers: {Authorization: `Bearer ${CONDUIT_API_KEY}`},
     })
-    return client.request({url: endpoint, method: method, data: data})
 }
 
 async function companyRequest(endpoint, method = 'POST', token, params = {}) {
-    let client = axios.create({
-        baseURL: CONDUIT_API_URL,
-        headers: {
-            accept: 'application/json',
-        },
-        params: {token: token, ...params}
+        return axiosInstance.request({
+        url: endpoint,
+        method: method,
+        params: {token: token, ...params},
     })
-    return client.request({url: endpoint, method: method, params: params})
 }
 
 /**

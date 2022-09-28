@@ -7,16 +7,19 @@ async function printCompanyInfo(company) {
     let companyToken = company.api_token.token
     let connectFacebookUrl = await getCompanyConnectIntegrationURL(companyToken, 'demo_facebook',)
     let connectGoogleAdsUrl = await getCompanyConnectIntegrationURL(companyToken, 'demo_google_ads',)
-    console.table(
-        {
-            'Token': companyToken,
-            'Link page': company.link_page.url,
-        }
-    )
-    console.log('\x1b[32mConnect Demo Facebook URL: \x1b[0m')
-    console.log(connectFacebookUrl)
-    console.log('\x1b[32mConnect Demo Google Ads URL: \x1b[0m')
-    console.log(connectGoogleAdsUrl)
+
+
+    let printData = {
+        'Token': companyToken,
+        'Link page': company.link_page.url,
+        'Connect Demo Facebook URL:': connectFacebookUrl,
+        'Connect Demo Google Ads URL': connectGoogleAdsUrl,
+    }
+
+    for (let [key, value] of Object.entries(printData)) {
+        console.log(`\x1b[32m${key}: \x1b[0m`)
+        console.log(value)
+    }
 
     if (company.connections.length !== 0) {
         console.log('Connections: ')
