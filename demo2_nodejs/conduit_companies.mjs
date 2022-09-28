@@ -18,7 +18,7 @@ async function appRequest(endpoint, method = 'POST', data = {}) {
 }
 
 async function companyRequest(endpoint, method = 'POST', token, params = {}) {
-        return axiosInstance.request({
+    return axiosInstance.request({
         url: endpoint,
         method: method,
         params: {token: token, ...params},
