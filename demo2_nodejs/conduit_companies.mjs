@@ -17,10 +17,10 @@ async function appRequest(endpoint, method = 'POST', data = {}) {
     })
 }
 
-async function companyRequest(endpoint, token, method = 'GET', params = {}) {
+async function companyRequest(endpoint, token, params = {}) {
     return axiosInstance.request({
+        method: 'GET',
         url: endpoint,
-        method: method,
         params: {token: token, ...params},
     })
 }
@@ -81,4 +81,4 @@ async function getCompanyConnectIntegrationURL(companyToken, integration) {
 }
 
 
-export { createCompany, getCompanies, getCompanyConnectIntegrationURL }
+export {createCompany, getCompanies, getCompanyConnectIntegrationURL}
