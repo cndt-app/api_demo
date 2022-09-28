@@ -81,4 +81,4 @@ async function getCompanyConnectIntegrationURL(companyToken, integration) {
 }
 
 
-export {createCompany, getCompanies, getCompanyConnectIntegrationURL}
+export { createCompany, getCompanies, getCompanyConnectIntegrationURL }
