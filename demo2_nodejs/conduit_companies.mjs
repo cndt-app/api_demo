@@ -26,7 +26,6 @@ async function companyRequest(endpoint, token, params = {}) {
     })
 }
 
-
 /**
  * @typedef {{name: String, id: Number, native_id: String}} Account
  * @typedef {{name: String, id: Number, created_at: String, accounts: Account[]}} Credentials
@@ -83,4 +82,4 @@ async function getCompanyConnectIntegrationURL(companyToken, integration) {
 }
 
 
-export {createCompany, getCompanies, getCompanyConnectIntegrationURL}
+export { createCompany, getCompanies, getCompanyConnectIntegrationURL }
