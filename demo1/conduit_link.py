@@ -50,11 +50,9 @@ def get_data_chunks(
 
 def _request(path: str, params: dict[str, Any] = None) -> Any:
     headers = {
-        'accept': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': f'Bearer {CONDUIT_CUSTOMER_API_KEY}',
     }
-    params = params or {}
-    params['token'] = CONDUIT_CUSTOMER_API_KEY
-
     res = requests.request('GET', urljoin(CONDUIT_API_URL, path), headers=headers, params=params)
     res.raise_for_status()
 
