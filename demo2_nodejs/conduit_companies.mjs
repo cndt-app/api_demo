@@ -21,9 +21,11 @@ async function companyRequest(endpoint, token, params = {}) {
     return axiosInstance.request({
         method: 'GET',
         url: endpoint,
-        params: {token: token, ...params},
+        headers: {Authorization: `Bearer ${token}`},
+        params: params,
     })
 }
+
 
 /**
  * @typedef {{name: String, id: Number, native_id: String}} Account
@@ -81,4 +83,4 @@ async function getCompanyConnectIntegrationURL(companyToken, integration) {
 }
 
 
-export { createCompany, getCompanies, getCompanyConnectIntegrationURL }
+export {createCompany, getCompanies, getCompanyConnectIntegrationURL}
