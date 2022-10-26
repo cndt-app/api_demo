@@ -5,7 +5,6 @@ import requests
 
 CONDUIT_API_URL = 'https://api.getconduit.app'
 CONDUIT_API_KEY = ' place your api key here '
-CONDUIT_API_KEY = '74bfac4c50434dad86bdcaa065de1524'
 
 
 def get_companies() -> list[dict[str, Any]]:
