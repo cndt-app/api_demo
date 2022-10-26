@@ -6,9 +6,12 @@ const CONDUIT_CUSTOMER_API_KEY = ' place your api key here '
 async function httpGet(endpoint, params = {}) {
     let client = axios.create({
         baseURL: CONDUIT_API_URL,
-        headers: {accept: 'application/json'},
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${CONDUIT_CUSTOMER_API_KEY}`,
+        },
+        params: params,
     })
-    params.token = CONDUIT_CUSTOMER_API_KEY
     return client.get(endpoint, {params: params})
 }
 
