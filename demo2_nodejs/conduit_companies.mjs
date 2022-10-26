@@ -21,7 +21,8 @@ async function companyRequest(endpoint, token, params = {}) {
     return axiosInstance.request({
         method: 'GET',
         url: endpoint,
-        params: {token: token, ...params},
+        headers: {Authorization: `Bearer ${token}`},
+        params: params,
     })
 }
 

@@ -10,7 +10,7 @@ CONDUIT_API_KEY = ' place your api key here '
 def get_companies() -> list[dict[str, Any]]:
     """
     Returns list of companies
-    :return: list of users
+    :return: list of companies
     """
     res = _request('link/company/?include_connections=true', method='GET')
     return res.json()
